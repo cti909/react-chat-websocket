@@ -1,0 +1,28 @@
+.zavatar.zavatar-l .a-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--surface-background);
+    color: var(--text-secondary);
+    overflow: hidden;
+    object-fit: contain;
+    font-size: .75rem;
+    font-weight: 500;
+    line-height: 1.5;
+    border: 1px solid var(--WA100);
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+.image-border {
+    width: 48px;
+    height: 48px;
+    border: 1px solid;
+    border-radius: 50%;
+}
+.image-avatar {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    border-radius: 50%;
+}
