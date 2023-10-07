@@ -19,6 +19,7 @@
 } 
 .chat-user-item {
     height: 74px;
+    cursor: pointer;
 }
 .chat-user-item:hover {
     background: #f3f5f6;
@@ -26,9 +27,7 @@
 .chat-user-list .active {
     background: #e5efff;
 }
-.user-item-avatar {
-    width: 30%;
-}
+
 .user-item-content {
     width: 70%;
 }
@@ -36,7 +35,7 @@
     display: flex;
     justify-content: center;
     align-items:  center;
-    width: 100%;
+    width: 64px;
     height: 64px;
     padding: 0;
     font-size: 24px;

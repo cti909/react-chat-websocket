@@ -9,7 +9,7 @@ import {
 } from "../../store/services/api.config";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserAction } from "../../store/actions/authAction";
-import { userFilterOtherAction } from "../../store/actions/userAction";
+// import { userFilterOtherAction } from "../../store/actions/userAction";
 
 const FriendRequestTest = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const FriendRequestTest = () => {
 
   useEffect(() => {
     dispatch(setUserAction());
-    dispatch(userFilterOtherAction({ searchToken: "" }));
+    // dispatch(userFilterOtherAction({ searchToken: "" }));
   }, []);
 
   useEffect(() => {

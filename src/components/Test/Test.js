@@ -9,7 +9,7 @@ const Test = () => {
   const userId = 1;
   window.Pusher = Pusher;
   window.Echo = new Echo({
-    // authEndpoint: "http://127.0.0.1:8000/api/broadcasting/auth",
+    authEndpoint: "http://127.0.0.1:8000/api/broadcasting/auth",
     broadcaster: "pusher",
     key: "asdf",
     cluster: "mt1",

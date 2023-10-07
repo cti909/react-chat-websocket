@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from "react";
-import "../../assets/css/navcontrol.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAddressBook,
   faCloud,
+  faComment,
   faGear,
 } from "@fortawesome/free-solid-svg-icons";
-import { faComment } from "@fortawesome/free-regular-svg-icons";
-import { Button } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { setUserAction } from "../../store/actions/authAction";
+import { Button } from "react-bootstrap";
+import { Avatar } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import "../../assets/css/navcontrol.css";
 
-const NavControl = () => {
+const ControlNavbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [buttonActive, setButtonActive] = useState(1);
+  const [buttonActive, setButtonActive] = useState(0);
   const isLogin = useSelector((state) => state.auth.isLogin);
   const user = useSelector((state) => state.auth.user);
 
@@ -28,15 +29,23 @@ const NavControl = () => {
     } else {
       navigate("/login");
     }
+
+    const currentURL = window.location.href;
+    const parts = currentURL.split("/");
+    const action = parts[parts.length - 1];
+    if (currentURL.includes("conversation")) setButtonActive(1);
+    if (action === "contact") setButtonActive(2);
   }, []);
 
   const handleClickChat = () => {
     console.log("handleClickChat");
     setButtonActive(1);
+    navigate("/conversation");
   };
   const handleClickContact = () => {
     console.log("handleClickContact");
     setButtonActive(2);
+    navigate("/contact");
   };
 
   const iconNavbar = [
@@ -53,15 +62,11 @@ const NavControl = () => {
   ];
 
   return (
-    <div className="d-flex justify-content-between flex-column vh-100 navbar-width navbar-color">
+    <div className="sidebarNav d-flex justify-content-between flex-column vh-100 navbar-width navbar-color">
       <div>
         <div className="navbar-list-button">
           <Button className="navbar-button mt-3">
-            <img
-              src={Object.keys(user).length !== 0 ? user.avatar : ""}
-              style={{ width: "48px", border: "50%" }}
-              alt="loading"
-            />
+            <Avatar alt={user.name} src={user.avatar} />
           </Button>
           {iconNavbar.map((item) => (
             <Button
@@ -110,4 +115,4 @@ const NavControl = () => {
   );
 };
 
-export default NavControl;
+export default ControlNavbar;

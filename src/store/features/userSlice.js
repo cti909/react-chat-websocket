@@ -1,8 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userFilterOtherAction } from "../actions/userAction";
+import {
+  friendFilterAction,
+  friendInvitation,
+  getFriendInvitationAction,
+  userFilterAction,
+} from "../actions/userAction";
 
 const initialState = {
-  user: {},
+  friendInvitationSender: [],
+  friendInvitationReceiver: [],
+  friendFilter: [],
   userFilter: [],
   loading: false,
   error: null,
@@ -13,15 +20,43 @@ export const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    // userFilterOtherAction
-    builder.addCase(userFilterOtherAction.pending, (state) => {
+    // friendFilter
+    builder.addCase(friendFilterAction.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(userFilterOtherAction.fulfilled, (state, action) => {
+    builder.addCase(friendFilterAction.fulfilled, (state, action) => {
+      console.log(action.payload.data);
+      state.loading = false;
+      state.friendFilter = action.payload.data;
+    });
+    builder.addCase(friendFilterAction.rejected, (state, action) => {
+      state.loading = false;
+      console.log("error in slice: ", action.error.message);
+      state.error = action.error.message;
+    });
+    // userFilter
+    builder.addCase(userFilterAction.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(userFilterAction.fulfilled, (state, action) => {
       state.loading = false;
       state.userFilter = action.payload.data;
     });
-    builder.addCase(userFilterOtherAction.rejected, (state, action) => {
+    builder.addCase(userFilterAction.rejected, (state, action) => {
+      state.loading = false;
+      console.log("error in slice: ", action.error.message);
+      state.error = action.error.message;
+    });
+    // friendInvitation
+    builder.addCase(getFriendInvitationAction.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getFriendInvitationAction.fulfilled, (state, action) => {
+      state.loading = false;
+      state.friendInvitationSender = action.payload.data.senderList;
+      state.friendInvitationReceiver = action.payload.data.receiverList;
+    });
+    builder.addCase(getFriendInvitationAction.rejected, (state, action) => {
       state.loading = false;
       console.log("error in slice: ", action.error.message);
       state.error = action.error.message;
